@@ -63,8 +63,8 @@ end
 
 def crew_collection(hash, movie)
 	movie.map do |k|
-		crew = k['crew'].map {|k| k['url']}
-		cast = k['cast'].map {|k| k['url']}
+		crew = k['crew'].map { |k| k['url'] }
+		cast = k['cast'].map { |k| k['url'] }
 		hash[k['url']] = crew + cast
 	end
 end
@@ -77,8 +77,8 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 	crew_actor_2 = {}
 	crew_collection(crew_actor_2, movie_info_2)
 	mov = nil
-	movies_crew_list_1 = crew_actor_1.map { |k,v| v }.flatten.uniq
-	movies_crew_list_2 = crew_actor_2.map { |k,v| v }.flatten.uniq
+	movies_crew_list_1 = crew_actor_1.map { |k, v| v }.flatten.uniq
+	movies_crew_list_2 = crew_actor_2.map { |k, v| v }.flatten.uniq
 	common_actor = []
 	crew_actor_1.each do |k, v|
 		common_actor = v & movies_crew_list_2
@@ -99,8 +99,8 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 		end
 		if common_actor_1_role.blank? || first_actor_role.blank?
 			mov_info['crew'].each do |k|
-				common_actor_1_role = k['role'] if k['url'] == common_actor.first if common_actor_1_role.blank?
-				first_actor_role = k['role'] if k['url'] == p1 if first_actor_role.blank?
+				common_actor_1_role = k['role'] if k['url'] == common_actor.first && common_actor_1_role.blank?
+				first_actor_role = k['role'] if k['url'] == p1 && first_actor_role.blank?
 			end
 		end
 		puts "#{common_actor_1_role}: #{common_actor.first}"
@@ -108,7 +108,7 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 		common_actor_2_role = ""
 		second_actor_role = ""
 		movie_2 = ""
-		crew_actor_2.each {|k,v| movie_2 = k if v.include?(common_actor.first)}
+		crew_actor_2.each { |k, v| movie_2 = k if v.include?(common_actor.first)}
 		mov_2_info = list_action(movie_2)
 		puts "2. Movie: #{mov_2_info['name']}"
 		mov_2_info['cast'].each do |k|
@@ -117,8 +117,8 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 		end
 		if common_actor_2_role.blank? || second_actor_role.blank?
 			mov_2_info['crew'].each do |k|
-				common_actor_2_role = k['role'] if k['url'] == common_actor.first if common_actor_2_role.blank?
-				second_actor_role = k['role'] if k['url'] == p2 if second_actor_role.blank?
+				common_actor_2_role = k['role'] if k['url'] == common_actor.first
+				second_actor_role = k['role'] if k['url'] == p2
 			end
 		end
 		puts "#{common_actor_2_role}: #{common_actor.first}"
@@ -152,7 +152,7 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 			common_actor_2_role = ""
 			second_actor_role = ""
 			movie_2 = ""
-			movies_crew_list_1.each {|k,v| movie_2 = k if v.include?(common_actor.first)}
+			movies_crew_list_1.each { |k, v| movie_2 = k if v.include?(common_actor.first)}
 			mov_2_info = list_action(movie_2)
 			puts "2. Movie: #{mov_2_info['name']}"
 			mov_2_info['cast'].each do |k|
@@ -173,4 +173,5 @@ def degree_of_seperation_2(p1, p2, movies_1, movies_2)
 	end
 end
 degrees
+
 
